@@ -1,6 +1,6 @@
 <template>
   <form @submit.prevent class="p-4 shadow">
-    <h3>Add Todo</h3>
+    <h3>Register</h3>
 
     <div class="row mt-3">
       <div class="col-6">
@@ -83,6 +83,7 @@ export default {
         .post(this.route, this.form)
         .then(() => {
           console.log("success");
+          this.$router.push({ name: "login" });
         })
         .catch((e) => {
           console.log(e);
