@@ -94,7 +94,6 @@
 </template>
 
 <script>
-import axios from "axios";
 export default {
   name: "App",
   data() {
@@ -113,7 +112,7 @@ export default {
       this.editing = id;
     },
     getTodos() {
-      axios
+      this.$http
         .get(this.todoRoute)
         .then(({ data }) => {
           this.todos = [...data];
@@ -123,7 +122,7 @@ export default {
         });
     },
     createTodo() {
-      axios
+      this.$http
         .post(this.todoRoute, this.todoForm)
         .then(() => {
           this.getTodos();
@@ -137,7 +136,7 @@ export default {
       this.activeTodo = { ...todo };
     },
     updateTodo(id) {
-      axios
+      this.$http
         .put(this.todoRoute + `/${id}`, {
           name: this.activeTodo.name,
           description: this.activeTodo.description,
@@ -151,7 +150,7 @@ export default {
         });
     },
     deleteTodo(id) {
-      axios
+      this.$http
         .delete(this.todoRoute + `/${id}`)
         .then(() => {
           this.getTodos();

@@ -68,8 +68,6 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   data() {
     return {
@@ -79,7 +77,7 @@ export default {
   },
   methods: {
     createUser() {
-      axios
+      this.$http
         .post(this.route, this.form)
         .then(() => {
           console.log("success");

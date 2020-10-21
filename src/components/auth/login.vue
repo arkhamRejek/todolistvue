@@ -29,23 +29,27 @@
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   data() {
     return {
+      token: localStorage.getItem("token"),
       form: {},
       route: "/api/login",
     };
   },
   created() {
-    console.log(this.$router);
+    if (this.token) {
+      this.$router.push({ name: "app" });
+    }
   },
   methods: {
     login() {
-      axios
+      this.$http
         .post(this.route, this.form)
-        .then(() => {
+        .then(({ data }) => {
+          // localStorage.setItem("token", data.token);
+          console.log(this.$http.headers);
+          this.$http.headers["authorization"] = `Bearer ${data.token}`;
           this.$router.push({ name: "app" });
         })
         .catch((e) => {
