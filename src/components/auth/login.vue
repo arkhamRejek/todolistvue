@@ -47,9 +47,8 @@ export default {
       this.$http
         .post(this.route, this.form)
         .then(({ data }) => {
-          // localStorage.setItem("token", data.token);
-          console.log(this.$http.headers);
-          this.$http.headers["authorization"] = `Bearer ${data.token}`;
+          localStorage.setItem("token", data.token);
+          this.$http.defaults.headers["authorization"] = `Bearer ${data.token}`;
           this.$router.push({ name: "app" });
         })
         .catch((e) => {
