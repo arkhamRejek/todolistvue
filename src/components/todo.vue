@@ -112,7 +112,7 @@ export default {
       this.editing = id;
     },
     getTodos() {
-      this.$http
+      this.$axios
         .get(this.todoRoute)
         .then(({ data }) => {
           this.todos = [...data];
@@ -122,7 +122,7 @@ export default {
         });
     },
     createTodo() {
-      this.$http
+      this.$axios
         .post(this.todoRoute, this.todoForm)
         .then(() => {
           this.getTodos();
@@ -136,7 +136,7 @@ export default {
       this.activeTodo = { ...todo };
     },
     updateTodo(id) {
-      this.$http
+      this.$axios
         .put(this.todoRoute + `/${id}`, {
           name: this.activeTodo.name,
           description: this.activeTodo.description,
@@ -150,7 +150,7 @@ export default {
         });
     },
     deleteTodo(id) {
-      this.$http
+      this.$axios
         .delete(this.todoRoute + `/${id}`)
         .then(() => {
           this.getTodos();

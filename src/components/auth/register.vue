@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     createUser() {
-      this.$http
+      this.$axios
         .post(this.route, this.form)
         .then(() => {
           console.log("success");

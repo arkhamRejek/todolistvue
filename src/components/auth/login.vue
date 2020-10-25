@@ -44,11 +44,13 @@ export default {
   },
   methods: {
     login() {
-      this.$http
+      this.$axios
         .post(this.route, this.form)
         .then(({ data }) => {
           localStorage.setItem("token", data.token);
-          this.$http.defaults.headers["authorization"] = `Bearer ${data.token}`;
+          this.$axios.defaults.headers[
+            "authorization"
+          ] = `Bearer ${data.token}`;
           this.$router.push({ name: "app" });
         })
         .catch((e) => {
