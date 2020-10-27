@@ -6,14 +6,9 @@
 
 <script>
 export default {
-  created() {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      this.$axios.defaults.headers["authorization"] = `Bearer ${token}`;
-    } else {
-      this.$router.push({ name: "login" });
-    }
+  mounted() {
+    console.log(this.$store);
+    this.$store.dispatch("app/init");
   },
 };
 </script>
