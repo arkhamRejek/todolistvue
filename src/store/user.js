@@ -31,7 +31,7 @@ const mutations = {
   },
 };
 
-export const app = {
+export const user = {
   namespaced: true,
   state,
   getters,

@@ -102,6 +102,7 @@ export default {
       todoForm: {},
       todoRoute: "/api/todos",
       activeTodo: null,
+      state: this.$store.app.state,
     };
   },
   created() {
