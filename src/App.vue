@@ -6,9 +6,8 @@
 
 <script>
 export default {
-  mounted() {
-    console.log("vue instance", this);
-    this.$store.dispatch("app/init");
+  async created() {
+    await this.$store.dispatch("app/init");
   },
 };
 </script>

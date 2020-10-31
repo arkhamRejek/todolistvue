@@ -35,6 +35,7 @@ export default {
       token: localStorage.getItem("token"),
       form: {},
       route: "/api/login",
+      state: this.$store.state.app,
     };
   },
   created() {
@@ -48,9 +49,7 @@ export default {
         .post(this.route, this.form)
         .then(({ data }) => {
           localStorage.setItem("token", data.token);
-          this.$axios.defaults.headers[
-            "authorization"
-          ] = `Bearer ${data.token}`;
+          this.$store.dispatch("app/setToken", data.token);
           this.$router.push({ name: "app" });
         })
         .catch((e) => {

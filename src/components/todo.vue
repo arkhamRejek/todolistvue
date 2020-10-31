@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="tokenIsPresent">
     <div class="row mt-5">
       <div class="col-4">
         <form @submit.prevent class="p-4 shadow">
@@ -102,11 +102,16 @@ export default {
       todoForm: {},
       todoRoute: "/api/todos",
       activeTodo: null,
-      state: this.$store.app.state,
+      state: this.$store.state.app,
     };
   },
   created() {
     this.getTodos();
+  },
+  computed: {
+    tokenIsPresent() {
+      return this.$store.getters["app/activeToken"] !== null;
+    },
   },
   methods: {
     setEditing(id) {

@@ -5,7 +5,11 @@ const state = {
   token: localStorage.getItem("token"),
 };
 
-const getters = {};
+const getters = {
+  activeToken: (state) => {
+    return state.token;
+  },
+};
 
 const actions = {
   init({ commit }) {
@@ -23,11 +27,12 @@ const actions = {
 };
 
 const mutations = {
-  setToken(state, arg) {
-    state.token = arg;
+  setToken(state, token) {
+    Vue.prototype.$axios.defaults.headers["authorization"] = `Bearer ${token}`;
+
+    state.token = token;
     // this.$axios or the "this" instance is not available in the stores
     // once we obtain the token we set the authorization to send back to our server
-    Vue.prototype.$axios.defaults.headers["authorization"] = `Bearer ${arg}`;
   },
 };
 
