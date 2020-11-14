@@ -3,6 +3,7 @@ import { router } from "../routes";
 
 const state = {
   token: localStorage.getItem("token"),
+  todos: [],
 };
 
 const getters = {
@@ -24,6 +25,21 @@ const actions = {
   setToken({ commit }, token) {
     commit("setToken", token);
   },
+  async refreshToken({ commit }) {
+    const token = localStorage.getItem("refreshToken");
+
+    if (!token) return router.push({ name: "login" });
+
+    try {
+      const { token } = await Vue.prototype.$axios.post("/api/token", {
+        token,
+      });
+      localStorage.setItem("token", token);
+      commit("setToken", token);
+    } catch (e) {
+      console.log(e);
+    }
+  },
 };
 
 const mutations = {
@@ -31,6 +47,7 @@ const mutations = {
     Vue.prototype.$axios.defaults.headers["authorization"] = `Bearer ${token}`;
 
     state.token = token;
+
     // this.$axios or the "this" instance is not available in the stores
     // once we obtain the token we set the authorization to send back to our server
   },

@@ -7,6 +7,7 @@
 <script>
 export default {
   async created() {
+    console.log("looll", this);
     await this.$store.dispatch("app/init");
   },
 };

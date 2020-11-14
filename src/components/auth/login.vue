@@ -49,6 +49,7 @@ export default {
         .post(this.route, this.form)
         .then(({ data }) => {
           localStorage.setItem("token", data.token);
+          localStorage.setItem("refreshToken", data.refreshToken);
           this.$store.dispatch("app/setToken", data.token);
           this.$router.push({ name: "app" });
         })
