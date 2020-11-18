@@ -80,7 +80,6 @@ export default {
       this.$axios
         .post(this.route, this.form)
         .then(() => {
-          console.log("success");
           this.$router.push({ name: "login" });
         })
         .catch((e) => {

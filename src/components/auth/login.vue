@@ -48,9 +48,9 @@ export default {
       this.$axios
         .post(this.route, this.form)
         .then(({ data }) => {
-          localStorage.setItem("token", data.token);
+          localStorage.setItem("token", data.accessToken);
           localStorage.setItem("refreshToken", data.refreshToken);
-          this.$store.dispatch("app/setToken", data.token);
+          this.$store.dispatch("app/setToken", data.accessToken);
           this.$router.push({ name: "app" });
         })
         .catch((e) => {
